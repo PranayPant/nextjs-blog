@@ -7,7 +7,7 @@ export default function FirstPost(props){
     return(
         <div>
             <Head>
-                <title>First Post</title>
+                <title>Quote of the Ye</title>
             </Head>
             <h1>First Post</h1>
             <Link href='/'><a>Back Home</a></Link>
