@@ -43,13 +43,13 @@
         max-width: 80%;
         padding: 5px 10px;
         border-radius: 25px;
-        border: 1px solid whitesmoke;
+        box-shadow: 0 0 1px 3px rgb(1, 7, 12);
         background-color: whitesmoke;
         outline: none;
         &:hover{
             cursor: pointer;
-            border: 2px solid rgb(92, 120, 151);
-            box-shadow: 0 0 2px 5px rgb(71, 131, 180);
+            border: 1px solid rgb(92, 120, 151);
+            box-shadow: 0 0 1px 3px rgb(71, 131, 180);
         }
         .quote {
             opacity: 1;
