@@ -2,7 +2,7 @@
 
 .container {
     display: grid;
-    grid-template-rows: 20% 80%;
+    grid-template-rows: 20% 60% 20%;
     height: 100vh;
     background-image: url("/images/kanye.png");
 }
@@ -55,6 +55,25 @@
             opacity: 1;
             font-size: 2rem;
             font-weight: 500;
+        }
+    }
+}
+
+.footer {
+    height: 100%;
+    width: 100%;
+    grid-row: 3 / 4;
+    @include flex;
+    .plus{
+        height: 100%;
+        @include flex;
+        img{
+            width: 70%;
+            height: 70%;
+            &:hover {
+                cursor: pointer;
+                transform: scale(1.1);
+            }
         }
     }
 }
