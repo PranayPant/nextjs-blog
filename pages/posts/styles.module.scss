@@ -1,18 +1,60 @@
 @import '../../styles/mixins';
 
+.container {
+    display: grid;
+    grid-template-rows: 20% 80%;
+    height: 100vh;
+    background-image: url("/images/kanye.png");
+}
+
 .header {
+    grid-row: 1 / 2;
+    height: 100%;
     @include flex;
-    .item{
-        @include flex
+    .title{
+        @include flex;
+        width: 90%;
+        height: 100%;
+        font-size: 3rem;
+        color: whitesmoke;
+    }
+    .homeLink {
+        @include flex;
+        width: 10%;
+        height: 100%;
+        .logo{
+            width: 20%;
+            height: 20%;
+            margin: 0 0 7vh 3vw;
+            &:hover{
+                cursor: pointer;
+                transform: scale(1.1)
+            }
+        }
     }
 }
 
-.container {
-    display: grid;
-    grid-template-rows: 10% 90%;
-    height: 100vh;
-    background-image: url("/images/kanye.jpeg");
-    background-color: gray;
-    background-blend-mode: lighten;
-    background-size: 100% 100%;
+.main {
+    height: 100%;
+    grid-row: 2 /3;
+    @include flex;
+    .content{
+        @include flex;
+        max-width: 80%;
+        padding: 5px 10px;
+        border-radius: 25px;
+        border: 1px solid whitesmoke;
+        background-color: whitesmoke;
+        outline: none;
+        &:hover{
+            cursor: pointer;
+            border: 2px solid rgb(92, 120, 151);
+            box-shadow: 0 0 2px 5px rgb(71, 131, 180);
+        }
+        .quote {
+            opacity: 1;
+            font-size: 2rem;
+            font-weight: 500;
+        }
+    }
 }
