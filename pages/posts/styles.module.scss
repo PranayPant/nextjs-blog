@@ -1,3 +1,18 @@
-.imgContainer{
-    width: 300px;
+@import '../../styles/mixins';
+
+.header {
+    @include flex;
+    .item{
+        @include flex
+    }
+}
+
+.container {
+    display: grid;
+    grid-template-rows: 10% 90%;
+    height: 100vh;
+    background-image: url("/images/kanye.jpeg");
+    background-color: gray;
+    background-blend-mode: lighten;
+    background-size: 100% 100%;
 }
