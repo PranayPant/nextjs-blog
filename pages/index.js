@@ -2,7 +2,7 @@ import Head from 'next/head';
 import Link from 'next/link';
 import {useState} from 'react';
 
-import { fetchQuote } from './api';
+import { fetchQuote } from '../api';
 import styles from './styles.module.scss';
 
 export default function FirstPost(props) {
