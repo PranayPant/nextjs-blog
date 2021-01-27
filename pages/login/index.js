@@ -1,6 +1,6 @@
 
 import { useForm } from 'react-hook-form'
-import {loginEmailPassword} from './api'
+import {loginEmailPassword} from '../../api'
 
 export default function Login(){
 
