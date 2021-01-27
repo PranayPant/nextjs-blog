@@ -1,19 +1,27 @@
 import Head from 'next/head';
 import Link from 'next/link';
-import {useState} from 'react';
+import {useState, useEffect} from 'react';
 
-import { fetchQuote } from '../api';
+import { fetchQuote, init } from './api';
 import styles from './styles.module.scss';
 
 export default function FirstPost(props) {
 
    const {quote} = props
-   const [state, setState] = useState({quote})
+   const [state, setState] = useState({quote, user: null})
 
    async function handleNewQuote() {
       const {quote} = await fetchQuote()
       setState( prev => ({...prev, quote}))
    }
+   async function handleInit(){
+      const {db, user} = await init()
+      setState( prev => ({...prev, user}))
+   }
+
+   useEffect(() => {
+      handleInit()
+   }, [])
 
    return (
       <div className={styles.container}>
@@ -27,8 +35,8 @@ export default function FirstPost(props) {
                </div>
                <div className={styles.homeLink}>
                   <div className={styles.logo}>
-                     <Link href="/">
-                        <img src='/icons/home.svg' />
+                     <Link href="/login">
+                        <img src='/icons/user.svg' />
                      </Link>
                   </div>
                </div>
