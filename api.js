@@ -1,14 +1,12 @@
 import * as Realm from 'realm-web';
-import {connect, MONGO_APP} from './db'
+import googleOneTap from 'google-one-tap';
+
+import {connectToDB, MONGO_APP} from './db'
 
 export async function fetchQuote(){
     const response = await fetch('https://api.kanye.rest');
     const data = await response.json();
     return data
-}
-
-function connectToDB(){
-    return connect()
 }
 
 async function loginWithAnon(){
@@ -24,8 +22,8 @@ async function loginWithAnon(){
 }
 
 export async function init(){
-    connectToDB()
     const user = await loginWithAnon()
+    connectToDB()
     return {user}
 }
 
@@ -39,3 +37,4 @@ export async function loginEmailPassword({email, password}){
         console.error("Failed to login user", err)
     }
 }
+
