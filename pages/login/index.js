@@ -1,6 +1,6 @@
 import Head from 'next/head';
 import { useForm } from 'react-hook-form';
-import { loginEmailPassword, loginGoogle, loginGoogleOneTap } from '../../api';
+import { loginEmailPassword } from '../../api';
 import GoogleLogin from 'react-google-login';
 
 export default function Login() {
