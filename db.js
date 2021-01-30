@@ -5,7 +5,7 @@ const DB = {db: null}
 
 export const MONGO_APP = new Realm.App({id: MONGODB_APP_ID})
 
-export function connect(){
+export function connectToDB(){
     const mongodb = MONGO_APP.currentUser.mongoClient("mongodb-atlas");
     DB.db = mongodb
 }
