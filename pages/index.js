@@ -1,8 +1,7 @@
 import Head from 'next/head';
 import Link from 'next/link';
-import {useState, useEffect} from 'react';
+import {useState} from 'react';
 
-import { fetchQuote, init } from '../api';
 import styles from './styles.module.scss';
 
 export default function FirstPost(props) {
@@ -14,14 +13,6 @@ export default function FirstPost(props) {
       const {quote} = await fetchQuote()
       setState( prev => ({...prev, quote}))
    }
-   async function handleInit(){
-      const {db, user} = await init()
-      setState( prev => ({...prev, user}))
-   }
-
-   useEffect(() => {
-      handleInit()
-   }, [])
 
    return (
       <div className={styles.container}>
@@ -64,7 +55,8 @@ export default function FirstPost(props) {
 
 export async function getStaticProps() {
    // Get external data from the file system, API, DB, etc.
-   const data = await fetchQuote()
+   const response = await fetch('https://api.kanye.rest')
+   const data = await response.json();
 
    // The value of the `props` key will be
    //  passed to the `Home` component
