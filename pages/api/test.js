@@ -6,7 +6,6 @@ import middleware from '../../middleware/db';
 const handler = nextConnect();
 handler.use(middleware);
 handler.get(async (req, res) => {
-    console.log('here')
 
     try{
         let doc = await req.db.collection('movies').findOne()
