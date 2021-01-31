@@ -1,6 +1,5 @@
 import Head from 'next/head';
 import { useForm } from 'react-hook-form';
-import { loginEmailPassword } from '../../api';
 import GoogleLogin from 'react-google-login';
 
 export default function Login() {
@@ -9,7 +8,6 @@ export default function Login() {
    });
    function onSubmit(data) {
       console.log(data);
-      loginEmailPassword(data);
    }
    function maskPassword(password) {
       return password.replaceAll(/\w/gi, '*');
