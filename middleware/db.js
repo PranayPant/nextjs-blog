@@ -2,7 +2,7 @@ import { MongoClient } from 'mongodb';
 import nextConnect from 'next-connect';
 
 const client = new MongoClient(
-   'mongodb+srv://admin:r883aQR84hQ6bvA@cluster0.uvsds.mongodb.net/sample_mflix?retryWrites=true&w=majority',
+   process.env.MONGO_URL,
    {
       useNewUrlParser: true,
       useUnifiedTopology: true,
@@ -12,7 +12,7 @@ const client = new MongoClient(
 async function database(req, res, next) {
    if (!client.isConnected()) await client.connect();
    req.dbClient = client;
-   req.db = client.db('sample_mflix');
+   req.db = client.db(process.env.DB)
    return next();
 }
 
