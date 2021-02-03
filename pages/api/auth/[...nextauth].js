@@ -1,4 +1,5 @@
 import NextAuth from 'next-auth';
+import { session, signIn } from 'next-auth/client';
 import Providers from 'next-auth/providers';
 import nodemailer from 'nodemailer';
 
@@ -12,11 +13,9 @@ const options = {
       Providers.Credentials({
          id: 'domain-login',
          name: 'Username/Password',
-         async authorize(credentials) {
-            const user = {
-               name: 'ppant',
-            };
-            return user;
+         authorize: async function (credentials) {
+            console.log('creds', credentials);
+            return { name: credentials.username };
          },
          credentials: {
             username: {
@@ -38,16 +37,6 @@ const options = {
          from: process.env.EMAIL_FROM,
       }),
    ],
-   callbacks: {
-      /**
-       * @param  {string} url      URL provided as callback URL by the client
-       * @param  {string} baseUrl  Default base URL of site (can be used as fallback)
-       * @return {string}          URL the client will be redirect to
-       */
-      redirect: async (url, baseUrl) => {
-         return Promise.resolve('/profile/');
-      },
-   },
    pages: {
       // signIn: '/auth/signin',
       newUser: null, // If set, new users will be directed here on first sign in
@@ -55,6 +44,16 @@ const options = {
    session: { jwt: true },
    debug: true,
    database: process.env.MONGO_URL,
+   callbacks: {
+      /**
+       * @param  {string} url      URL provided as callback URL by the client
+       * @param  {string} baseUrl  Default base URL of site (can be used as fallback)
+       * @return {string}          URL the client will be redirect to
+       */
+      async redirect(url, baseUrl) {
+         return baseUrl;
+      },
+   },
 };
 
 export default async (req, res) => {
