@@ -1,17 +1,16 @@
 import Head from 'next/head';
 import Link from 'next/link';
-import {useState} from 'react';
+import { useState } from 'react';
 
 import styles from './styles.module.scss';
 
 export default function FirstPost(props) {
-
-   const {quote} = props
-   const [state, setState] = useState({quote, user: null})
+   const { quote } = props;
+   const [state, setState] = useState({ quote, user: null });
 
    async function handleNewQuote() {
-      const {quote} = await fetchQuote()
-      setState( prev => ({...prev, quote}))
+      const { quote } = await fetchQuote();
+      setState((prev) => ({ ...prev, quote }));
    }
 
    return (
@@ -26,8 +25,8 @@ export default function FirstPost(props) {
                </div>
                <div className={styles.homeLink}>
                   <div className={styles.logo}>
-                     <Link href="/login">
-                        <img src='/icons/user.svg' />
+                     <Link href="/api/auth/signin">
+                        <img src="/icons/user.svg" />
                      </Link>
                   </div>
                </div>
@@ -36,16 +35,14 @@ export default function FirstPost(props) {
          <main>
             <div className={styles.main}>
                <div className={styles.content}>
-                  <span className={styles.quote}>
-                     {state.quote}
-                  </span>
+                  <span className={styles.quote}>{state.quote}</span>
                </div>
             </div>
          </main>
          <footer>
             <div className={styles.footer}>
                <div onClick={handleNewQuote} className={styles.plus}>
-                  <img src='/icons/plus.svg' />
+                  <img src="/icons/plus.svg" />
                </div>
             </div>
          </footer>
@@ -55,7 +52,7 @@ export default function FirstPost(props) {
 
 export async function getStaticProps() {
    // Get external data from the file system, API, DB, etc.
-   const response = await fetch('https://api.kanye.rest')
+   const response = await fetch('https://api.kanye.rest');
    const data = await response.json();
 
    // The value of the `props` key will be
