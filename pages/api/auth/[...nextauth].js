@@ -43,7 +43,7 @@ const options = {
    },
    session: { jwt: true },
    debug: true,
-   database: process.env.MONGO_URL,
+   database: process.env.DATABASE_URL,
    callbacks: {
       /**
        * @param  {string} url      URL provided as callback URL by the client
