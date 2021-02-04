@@ -34,7 +34,7 @@ export default function FirstPost(props) {
                      <div className={styles.homeLink}>
                         <div className={styles.logo}>
                            <Link href="/api/auth/signin">
-                              <img src="/icons/user.svg" />
+                              <img src="/icons/enter.svg" />
                            </Link>
                         </div>
                      </div>
