@@ -4,28 +4,36 @@
     display: grid;
     grid-template-rows: 20% 60% 20%;
     height: 100vh;
-    background-image: url("/images/kanye.png");
+    background: url("/images/kanye.png") 100% 100%;
 }
 
 .header {
     grid-row: 1 / 2;
     height: 100%;
     @include flex;
+    @media only screen and (max-width: 900px) {
+        @include flex($justify: flex-end);
+    }
     .title{
         @include flex;
+        @media only screen and (max-width: 900px) {
+            display: none;
+        }
         width: 90%;
         height: 100%;
         font-size: 3rem;
-        color: whitesmoke;
+        color: #CCCC00;
     }
     .homeLink {
         @include flex;
         width: 10%;
         height: 100%;
         .logo{
-            width: 20%;
-            height: 20%;
-            margin: 0 0 7vh 3vw;
+            width: 50px;
+            height: 50px;
+            position: fixed;
+            top: 30px;
+            right: 30px;
             &:hover{
                 cursor: pointer;
                 transform: scale(1.1)
