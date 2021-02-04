@@ -1,5 +1,6 @@
 import Head from 'next/head';
 import Link from 'next/link';
+import router from 'next/router';
 import { useState } from 'react';
 import { signOut, useSession } from 'next-auth/client';
 
@@ -18,6 +19,12 @@ export default function FirstPost(props) {
       setState((prev) => ({ ...prev, quote }));
    }
 
+   async function handleLogin() {
+      if (!session) {
+         router.push('/api/auth/signin');
+      }
+   }
+
    return (
       <>
          {loading && <Loader />}
@@ -31,29 +38,44 @@ export default function FirstPost(props) {
                      <div className={styles.title}>
                         <h1>Kanye Quotes</h1>
                      </div>
-                     <div className={styles.homeLink}>
-                        <div className={styles.logo}>
-                           <Link href="/api/auth/signin">
-                              <img src="/icons/enter.svg" />
-                           </Link>
-                        </div>
-                     </div>
                   </div>
                </header>
                <main>
                   <div className={styles.main}>
                      <div className={styles.content}>
-                        <span className={styles.quote}>{state.quote}</span>
+                        <fieldset
+                           onClick={handleNewQuote}
+                           className={styles.fieldset}
+                        >
+                           <legend>
+                              <div>
+                                 <img
+                                    src="/icons/sync-alt-solid.svg"
+                                    alt="refresh"
+                                    height="40"
+                                    width="40"
+                                 ></img>
+                              </div>
+                           </legend>
+                           <span className={styles.quote}>{state.quote}</span>
+                        </fieldset>
+                        <div className={styles.emojis} onClick={handleLogin}>
+                           <img
+                              height="40"
+                              width="40"
+                              className={styles.upvote}
+                              src="/icons/thumbs-up.svg"
+                           />
+                           <img
+                              height="40"
+                              width="40"
+                              className={styles.downvote}
+                              src="icons/thumbs-down.svg"
+                           />
+                        </div>
                      </div>
                   </div>
                </main>
-               <footer>
-                  <div className={styles.footer}>
-                     <div onClick={handleNewQuote} className={styles.plus}>
-                        <img src="/icons/plus.svg" />
-                     </div>
-                  </div>
-               </footer>
             </div>
          )}
          {!loading && session && <Profile />}
