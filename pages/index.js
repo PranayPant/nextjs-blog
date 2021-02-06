@@ -31,34 +31,24 @@ export default function FirstPost(props) {
          {!loading && !session && (
             <div className={styles.container}>
                <Head>
-                  <title>Quote of the Ye</title>
+                  <title>Kanye Quotes</title>
                </Head>
                <header>
                   <div className={styles.header}>
                      <div className={styles.title}>
-                        <h1>Kanye Quotes</h1>
+                        <h1>Quote of the 'Ye</h1>
                      </div>
                   </div>
                </header>
                <main>
                   <div className={styles.main}>
                      <div className={styles.content}>
-                        <fieldset
+                        <div
                            onClick={handleNewQuote}
                            className={styles.fieldset}
                         >
-                           <legend>
-                              <div>
-                                 <img
-                                    src="/icons/sync-alt-solid.svg"
-                                    alt="refresh"
-                                    height="40"
-                                    width="40"
-                                 ></img>
-                              </div>
-                           </legend>
                            <span className={styles.quote}>{state.quote}</span>
-                        </fieldset>
+                        </div>
                         <div className={styles.emojis} onClick={handleLogin}>
                            <img
                               height="40"
