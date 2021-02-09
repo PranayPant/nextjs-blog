@@ -1,6 +1,8 @@
 
 :root{
-  --outline-blue: rgb(71, 131, 180)
+  --outline-blue: rgb(71, 131, 180);
+  --outline-blue-bright: rgb(0, 131, 180);
+  --orange: #FF6633;
 }
 
 html,
@@ -26,4 +28,8 @@ a {
 img {
   max-width: 100%;
   display: block;
+}
+
+h1, p{
+  margin: 0
 }

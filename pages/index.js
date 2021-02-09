@@ -27,58 +27,77 @@ export default function FirstPost(props) {
 
    return (
       <>
+         <Head>
+            <title>Kanye Quotes</title>
+         </Head>
          {loading && <Loader />}
-         {!loading && !session && (
+         {!loading && (
             <div className={styles.container}>
-               <Head>
-                  <title>Quote of the Ye</title>
-               </Head>
                <header>
                   <div className={styles.header}>
                      <div className={styles.title}>
-                        <h1>Kanye Quotes</h1>
+                        <h1>Quote of the 'Ye</h1>
                      </div>
+                     {session && (
+                        <div className={styles.profile}>
+                           <div className={styles.profileIcon}>
+                              <img
+                                 height="40"
+                                 width="40"
+                                 src="/icons/user.svg"
+                              />
+                           </div>
+                           <div className={styles.profileMenu}>
+                              <nav>
+                                 <ul>
+                                    <li>
+                                       <Link href="/profile">
+                                          <a>Profile</a>
+                                       </Link>
+                                    </li>
+
+                                    <li>
+                                       <Link href="#">
+                                          <a onClick={signOut}>Sign Out</a>
+                                       </Link>
+                                    </li>
+                                 </ul>
+                              </nav>
+                           </div>
+                        </div>
+                     )}
                   </div>
                </header>
                <main>
                   <div className={styles.main}>
                      <div className={styles.content}>
-                        <fieldset
+                        <div
                            onClick={handleNewQuote}
                            className={styles.fieldset}
                         >
-                           <legend>
-                              <div>
-                                 <img
-                                    src="/icons/sync-alt-solid.svg"
-                                    alt="refresh"
-                                    height="40"
-                                    width="40"
-                                 ></img>
-                              </div>
-                           </legend>
                            <span className={styles.quote}>{state.quote}</span>
-                        </fieldset>
+                        </div>
                         <div className={styles.emojis} onClick={handleLogin}>
-                           <img
-                              height="40"
-                              width="40"
-                              className={styles.upvote}
-                              src="/icons/thumbs-up.svg"
-                           />
-                           <img
-                              height="40"
-                              width="40"
-                              className={styles.downvote}
-                              src="icons/thumbs-down.svg"
-                           />
+                           <div className={styles.emojiContent}>
+                              <img
+                                 height="40"
+                                 width="40"
+                                 className={styles.upvote}
+                                 src="/icons/thumbs-up.svg"
+                              />
+                              <img
+                                 height="40"
+                                 width="40"
+                                 className={styles.downvote}
+                                 src="icons/thumbs-down.svg"
+                              />
+                           </div>
                         </div>
                      </div>
                   </div>
                </main>
             </div>
          )}
-         {!loading && session && <Profile />}
       </>
    );
 }
