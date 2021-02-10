@@ -22,6 +22,17 @@ export default function FirstPost(props) {
    async function handleLogin() {
       if (!session) {
          router.push('/api/auth/signin');
+      } else {
+         const response = await fetch(
+            `${window.location.origin}/api/likes/create`,
+            {
+               method: 'POST',
+               headers: {
+                  'Content-Type': 'application/json',
+               },
+               body: JSON.stringify({ user: session.user, quote: state.quote }),
+            },
+         );
       }
    }
 
