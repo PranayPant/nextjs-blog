@@ -87,21 +87,24 @@ export default function FirstPost(props) {
                            className={styles.fieldset}
                         >
                            <span className={styles.quote}>{state.quote}</span>
-                        </div>
-                        <div className={styles.emojis} onClick={handleLogin}>
-                           <div className={styles.emojiContent}>
-                              <img
-                                 height="40"
-                                 width="40"
-                                 className={styles.upvote}
-                                 src="/icons/thumbs-up.svg"
-                              />
-                              <img
-                                 height="40"
-                                 width="40"
-                                 className={styles.downvote}
-                                 src="icons/thumbs-down.svg"
-                              />
+                           <div className={styles.emojis}>
+                              <div
+                                 className={styles.emojiContent}
+                                 onClick={handleLogin}
+                              >
+                                 <img
+                                    height="40"
+                                    width="40"
+                                    className={styles.upvote}
+                                    src="/icons/thumbs-up.svg"
+                                 />
+                                 <img
+                                    height="40"
+                                    width="40"
+                                    className={styles.downvote}
+                                    src="icons/thumbs-down.svg"
+                                 />
+                              </div>
                            </div>
                         </div>
                      </div>
