@@ -63,6 +63,7 @@
             padding: 5px;
             border-bottom: 0.01rem solid #cccccc;
             &:hover {
+               cursor: pointer;
                background: #cccccc;
             }
          }
@@ -136,7 +137,7 @@
       .emojiContent {
          background-color: whitesmoke;
          @include flex;
-         @include interactive-border;
+         @include interactive-border($emphasis: 0);
          width: max-content;
       }
    }
@@ -148,7 +149,7 @@
 
    .content:hover .fieldset {
       cursor: pointer;
-      @include interactive-border(true);
+      @include interactive-border($emphasis: 1);
    }
 }
 

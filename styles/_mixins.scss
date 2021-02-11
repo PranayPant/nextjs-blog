@@ -5,10 +5,10 @@
   align-items: $align;
 }
 
-@mixin interactive-border($emphasis: false){
-  @if $emphasis {
+@mixin interactive-border($emphasis: 0){
+  @if $emphasis == 1 {
     border: 4px solid var(--outline-blue-bright);
-    box-shadow: 0 0 5px 4px var(--outline-blue-bright);
+    box-shadow: 0 0 4px 4px var(--outline-blue-bright);
   }
   @else{
     border: 3px solid var(--outline-blue);
