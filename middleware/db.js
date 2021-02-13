@@ -1,15 +1,20 @@
-import { MongoClient } from 'mongodb';
+import mongoose from 'mongoose';
 import nextConnect from 'next-connect';
 
-const client = new MongoClient(process.env.DATABASE_URL, {
-   useNewUrlParser: true,
-   useUnifiedTopology: true,
-});
+async function init() {
+   try {
+      mongoose.connect(process.env.DATABASE_URL, {
+         useNewUrlParser: true,
+         useUnifiedTopology: true,
+      });
+   } catch (err) {
+      console.log(('Err in db conn', err));
+   }
+}
 
 async function database(req, res, next) {
-   if (!client.isConnected()) await client.connect();
-   req.dbClient = client;
-   req.db = client.db(process.env.DB);
+   if (!mongoose.connection) await init();
+   console.log('connection is', mongoose.connection);
    return next();
 }
 

@@ -5,36 +5,13 @@ import { useState } from 'react';
 import { signOut, useSession } from 'next-auth/client';
 
 import styles from './styles.module.scss';
-import Profile from './profile';
+import Emoji from '../components/Emoji';
+import Quote from '../components/Quote';
 import Loader from '../components/Loader';
 
-export default function FirstPost(props) {
+export default function Home(props) {
    const { quote } = props;
-   const [state, setState] = useState({ quote, user: null });
    const [session, loading] = useSession();
-
-   async function handleNewQuote() {
-      const response = await fetch('https://api.kanye.rest');
-      const { quote } = await response.json();
-      setState((prev) => ({ ...prev, quote }));
-   }
-
-   async function handleLogin() {
-      if (!session) {
-         router.push('/api/auth/signin');
-      } else {
-         const response = await fetch(
-            `${window.location.origin}/api/likes/create`,
-            {
-               method: 'POST',
-               headers: {
-                  'Content-Type': 'application/json',
-               },
-               body: JSON.stringify({ user: session.user, quote: state.quote }),
-            },
-         );
-      }
-   }
 
    return (
       <>
@@ -82,31 +59,7 @@ export default function FirstPost(props) {
                <main>
                   <div className={styles.main}>
                      <div className={styles.content}>
-                        <div
-                           onClick={handleNewQuote}
-                           className={styles.fieldset}
-                        >
-                           <span className={styles.quote}>{state.quote}</span>
-                           <div className={styles.emojis}>
-                              <div
-                                 className={styles.emojiContent}
-                                 onClick={handleLogin}
-                              >
-                                 <img
-                                    height="40"
-                                    width="40"
-                                    className={styles.upvote}
-                                    src="/icons/thumbs-up.svg"
-                                 />
-                                 <img
-                                    height="40"
-                                    width="40"
-                                    className={styles.downvote}
-                                    src="icons/thumbs-down.svg"
-                                 />
-                              </div>
-                           </div>
-                        </div>
+                        <Quote quote={quote} />
                      </div>
                   </div>
                </main>
@@ -120,6 +73,8 @@ export async function getStaticProps() {
    // Get external data from the file system, API, DB, etc.
    const response = await fetch('https://api.kanye.rest');
    const data = await response.json();
+
+   console.log(data);
 
    // The value of the `props` key will be
    //  passed to the `Home` component
