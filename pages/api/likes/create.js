@@ -1,26 +1,44 @@
 import nextConnect from 'next-connect';
 import dbMiddleware from '../../../middleware/db';
-import Quote from '../../../schema/quote';
+import { quoteSchema } from '../../../schema/quote';
 
 const handler = nextConnect();
 handler.use(dbMiddleware);
 handler.post(async (req, res) => {
    try {
-      console.log(req.body);
-      const quote = new Quote({
-         text: req.body.quote,
-         author: 'Kanye West',
-         reactions: [
-            {
-               emote: req.body.reaction,
-               madeBy: { ...req.body.user },
+      const payload = req.body;
+      console.log('payload', payload);
+      const isValid = await quoteSchema.isValid(quoteSchema.cast(payload));
+      console.log(isValid);
+      if (isValid) {
+         const filter = {
+            quote: payload.quote,
+            author: payload.author,
+            reactions: {
+               $elemMatch: {
+                  madeBy: {
+                     email: payload.reactions[0].madeBy.email,
+                  },
+               },
             },
-         ],
-      });
-      const savedQuote = await quote.save();
-      res.json(savedQuote);
+         };
+         const update = { $set: payload };
+         const options = { upsert: true };
+         const doc = await req.db
+            .collection('quotes')
+            .updateOne(filter, update, options);
+         console.log('Successfully inserted!');
+         res.status(200);
+         res.end('Successful insert!');
+      } else {
+         res.status(400).send('Bad Payload');
+      }
    } catch (err) {
       console.log(err);
+      res.status(500);
+      res.json({
+         body: { message: 'Internal Server Error', err },
+      });
    }
 });
 export default handler;

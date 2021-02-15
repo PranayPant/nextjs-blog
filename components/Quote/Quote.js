@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import router from 'next/router';
 import { signOut, useSession } from 'next-auth/client';
 
 import styles from './styles.module.scss';
@@ -26,9 +27,18 @@ export default function Quote(props) {
                'Content-Type': 'application/json',
             },
             body: JSON.stringify({
-               user: session.user,
+               author: 'Kanye West',
                quote: state.quote,
-               reaction,
+               reactions: [
+                  {
+                     emote: reaction,
+                     madeBy: {
+                        email: session.user.email,
+                        image: session.user.image,
+                        name: session.user.name,
+                     },
+                  },
+               ],
             }),
          });
       }

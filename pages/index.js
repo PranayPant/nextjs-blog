@@ -1,11 +1,8 @@
 import Head from 'next/head';
 import Link from 'next/link';
-import router from 'next/router';
-import { useState } from 'react';
 import { signOut, useSession } from 'next-auth/client';
 
 import styles from './styles.module.scss';
-import Emoji from '../components/Emoji';
 import Quote from '../components/Quote';
 import Loader from '../components/Loader';
 
@@ -73,8 +70,6 @@ export async function getStaticProps() {
    // Get external data from the file system, API, DB, etc.
    const response = await fetch('https://api.kanye.rest');
    const data = await response.json();
-
-   console.log(data);
 
    // The value of the `props` key will be
    //  passed to the `Home` component

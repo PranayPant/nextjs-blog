@@ -1,18 +1,19 @@
-import mongoose from 'mongoose';
+import * as yup from 'yup';
 
-const quoteSchema = new mongoose.Schema({
-   text: { type: String, required: true },
-   author: { type: String, required: true },
-   reactions: [
-      {
-         emote: { type: String, required: true },
-         madeBy: {
-            name: String,
-            image: String,
-            email: { type: String, required: true },
-         },
-      },
-   ],
+export const quoteSchema = yup.object().shape({
+   quote: yup.string().required(),
+   author: yup.string().required(),
+   reactions: yup.array().of(
+      yup.object().shape({
+         emote: yup.string().required(),
+         madeBy: yup.object().shape({
+            name: yup.string(),
+            image: yup.string(),
+            email: yup.string().required(),
+         }),
+         createdOn: yup.date().default(function () {
+            return new Date();
+         }),
+      }),
+   ),
 });
-
-export default mongoose.model('Quote', quoteSchema);
