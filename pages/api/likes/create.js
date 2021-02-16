@@ -7,9 +7,7 @@ handler.use(dbMiddleware);
 handler.post(async (req, res) => {
    try {
       const payload = req.body;
-      console.log('payload', payload);
       const isValid = await quoteSchema.isValid(quoteSchema.cast(payload));
-      console.log(isValid);
       if (isValid) {
          const filter = {
             quote: payload.quote,

@@ -1,4 +1,5 @@
 import { collections } from './schema';
+import { MongoClient } from 'mongodb';
 
 async function createNewCollections(db, lookup) {
    // Process schema
@@ -30,7 +31,7 @@ async function deleteOldCollections(db, lookup) {
    );
 }
 
-export default async function init({ db }) {
+export async function setup(db) {
    try {
       // Get all collection from db
       const res = await db.listCollections().toArray();
@@ -48,5 +49,37 @@ export default async function init({ db }) {
       console.log('Successfully instantiated schema');
    } catch (err) {
       console.error('Err creating schema:', err);
+   }
+}
+
+export function getDbClient(url) {
+   return new MongoClient(url, {
+      useNewUrlParser: true,
+      useUnifiedTopology: true,
+   });
+}
+
+export async function connectDb(client, _db) {
+   try {
+      if (!client.isConnected()) {
+         await client.connect();
+      }
+      const db = _db ? client.db(_db) : client.db();
+      return db;
+   } catch (err) {
+      console.error('Err connecting to db:', err);
+      throw new Error(err);
+   }
+}
+
+export default async function init(dbUrl, dbName) {
+   try {
+      const client = getDbClient(dbUrl);
+      const db = await connectDb(client, dbName);
+      await setup(db);
+      return db;
+   } catch (err) {
+      console.error('Err initializing db connection:', err);
+      throw new Error(err);
    }
 }
