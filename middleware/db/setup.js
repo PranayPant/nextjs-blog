@@ -6,7 +6,7 @@ async function createNewCollections(db, lookup) {
    // Create new collections as needed
    // Mark old collections for deletion
    return Promise.all(
-      collections.map(({ name, primaryKeys }) => {
+      collections.map(({ name, primaryKeys, validations }) => {
          // If schema collection NOT IN REMOTE, create it
          if (lookup[name] === undefined) {
             console.log('Creating collection', name);
