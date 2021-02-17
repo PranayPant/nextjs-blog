@@ -14,16 +14,16 @@ export const collections = [
          properties: {
             imageUrl: {
                required: false,
-               type: 'string',
+               bsonType: 'string',
             },
             email: {
                required: false,
-               type: 'string',
-               patterns: `^.+\@.+$`,
+               bsonType: 'string',
+               pattern: '^.+@.+.$',
             },
             name: {
                required: true,
-               type: 'string',
+               bsonType: 'string',
             },
          },
       },
@@ -37,16 +37,15 @@ export const collections = [
          properties: {
             imageUrl: {
                required: false,
-               type: 'string',
+               bsonType: 'string',
             },
             email: {
                required: true,
-               type: 'string',
                patterns: `^.+\@.+$`,
             },
             name: {
                required: true,
-               type: 'string',
+               bsonType: 'string',
             },
          },
       },
@@ -59,11 +58,11 @@ export const collections = [
          required: ['authorId', 'quote'],
          properties: {
             authorId: {
-               type: 'ObjectId',
+               bsonType: 'ObjectId',
                required: true,
             },
             quote: {
-               type: 'string',
+               bsonType: 'string',
                required: true,
             },
          },
@@ -77,12 +76,16 @@ export const collections = [
          required: ['userId', 'quoteId', 'emote'],
          properties: {
             userId: {
-               type: 'ObjectId',
+               bsonType: 'ObjectId',
                required: true,
             },
             quoteId: {
-               type: 'ObjectId',
+               bsonType: 'ObjectId',
                required: true,
+            },
+            emote: {
+               bsonType: 'string',
+               required: 'true',
             },
          },
       },
