@@ -14,7 +14,7 @@
     "next": "^10.0.0",
     "next-auth": "^3.1.0",
     "next-connect": "^0.9.1",
-    "node-sass": "^5.0.0",
+    "node-sass": "^7.0.0",
     "react": "17.0.1",
     "react-dom": "17.0.1",
     "react-google-login": "^5.2.2",
