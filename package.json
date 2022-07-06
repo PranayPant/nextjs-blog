@@ -12,7 +12,7 @@
     "google-one-tap": "^1.0.1",
     "mongodb": "^3.6.3",
     "next": "^10.0.0",
-    "next-auth": "^3.1.0",
+    "next-auth": "^3.29.8",
     "next-connect": "^0.9.1",
     "node-sass": "^5.0.0",
     "react": "17.0.1",
